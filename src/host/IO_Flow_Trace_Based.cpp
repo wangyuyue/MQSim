@@ -2,6 +2,7 @@
 #include "../utils/StringTools.h"
 #include "ASCII_Trace_Definition.h"
 #include "../utils/DistributionTypes.h"
+#include "stdio.h"
 
 namespace Host_Components
 {
@@ -26,6 +27,7 @@ IO_Flow_Trace_Based::~IO_Flow_Trace_Based()
 
 Host_IO_Request *IO_Flow_Trace_Based::Generate_next_request()
 {
+	printf("generate next trace...\n");
 	if (current_trace_line.size() == 0 || STAT_generated_request_count >= total_requests_to_be_generated)
 	{
 		return NULL;
@@ -55,6 +57,7 @@ Host_IO_Request *IO_Flow_Trace_Based::Generate_next_request()
 	{
 		request->Start_LBA = start_lsa_on_device + request->Start_LBA % (end_lsa_on_device - start_lsa_on_device);
 	}
+	printf("request LBA cnt %d, start LBA %ld, type %d\n", request->LBA_count, request->Start_LBA, request->Type);
 
 	request->Arrival_time = time_offset + Simulator->Time();
 	STAT_generated_request_count++;

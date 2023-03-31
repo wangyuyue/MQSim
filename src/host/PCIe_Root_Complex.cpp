@@ -8,6 +8,7 @@ namespace Host_Components
 
 	void PCIe_Root_Complex::Write_to_memory(const uint64_t address, const void* payload)
 	{
+		printf("PCIe RC: write to memory %ld\n", address);
 		//This is a request to write back a read request data into memory (in modern systems the write is done to LLC)
 		if (address >= DATA_MEMORY_REGION) {
 			//nothing to do
@@ -30,6 +31,7 @@ namespace Host_Components
 
 	void PCIe_Root_Complex::Write_to_device(uint64_t address, uint16_t write_value)
 	{
+		printf("PCIe RC: write to device addr %ld\n", address);
 		PCIe_Message* pcie_message = new Host_Components::PCIe_Message;
 		pcie_message->Type = PCIe_Message_Type::WRITE_REQ;
 		pcie_message->Destination = Host_Components::PCIe_Destination_Type::DEVICE;
@@ -41,6 +43,7 @@ namespace Host_Components
 
 	void PCIe_Root_Complex::Read_from_memory(const uint64_t address, const unsigned int read_size)
 	{
+		printf("PCIe RC: read %d bytes from memory %ld\n", read_size, address);
 		PCIe_Message* new_pcie_message = new Host_Components::PCIe_Message;
 		new_pcie_message->Type = PCIe_Message_Type::READ_COMP;
 		new_pcie_message->Destination = Host_Components::PCIe_Destination_Type::DEVICE;

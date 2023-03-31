@@ -1,4 +1,5 @@
 #include "ONFI_Channel_NVDDR2.h"
+#include "stdio.h"
 
 namespace SSD_Components
 {
@@ -35,5 +36,10 @@ namespace SSD_Components
 		EraseCommandTime[3] = t_CS + t_WC * 4 + t_WB + (t_DBSY + t_WC * 4 + t_WB) + (t_DBSY + t_WC * 4 + t_WB);
 		EraseCommandTime[4] = t_CS + t_WC * 4 + t_WB + (t_DBSY + t_WC * 4 + t_WB) + (t_DBSY + t_WC * 4 + t_WB) + (t_DBSY + t_WC * 4 + t_WB);
 		EraseSuspendCommandTime = t_CS + t_WC * 3;
+
+		printf("TwoUnitDataInTime: %ld\n", TwoUnitDataInTime);
+		printf("TwoUnitDataOutTime: %ld\n", TwoUnitDataOutTime);
+		printf("ProgramSuspendCommandTime: %ld\n", ProgramSuspendCommandTime);
+		printf("ErasureSuspendCommandTime: %ld\n", EraseSuspendCommandTime);
 	}
 }
